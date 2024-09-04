@@ -31,19 +31,28 @@ class Maze:
             self.cells.append(col)
             top_left_y = self.y1 # Reset y axis when starting new column
             top_left_x += x_offset # Increment y axis only when starting new column
-        self.draw_cell()
 
-
-    def draw_cell(self):
         for col in self.cells:
             for cell in col:
-                cell.draw()
-                self.animate()
+                self.draw_cell(cell)
+        self.break_entrance_and_exit()
 
+    def draw_cell(self, cell):
+        cell.draw()
+        self.animate()
 
     def animate(self):
         if not self.win:
             return
         self.win.redraw()
         time.sleep(.05)
+
+    def break_entrance_and_exit(self):
+        start = self.cells[0][0]
+        end = self.cells[-1][-1]
+        start.has_top = False
+        end.has_bottom = False
+        self.draw_cell(start)
+        self.draw_cell(end)
+
 

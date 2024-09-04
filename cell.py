@@ -18,14 +18,13 @@ class Cell:
         top_right = Point(bottom_right.x, top_left.y)
         bottom_left = Point(top_left.x, bottom_right.y)
         win = self.win
-        if self.has_top:
-            win.draw_line(Line(top_left, top_right))
-        if self.has_right:
-            win.draw_line(Line(top_right, bottom_right))
-        if self.has_bottom:
-            win.draw_line(Line(bottom_left, bottom_right))
-        if self.has_left:
-            win.draw_line(Line(top_left, bottom_left))
+        default = "white"
+        color = "purple"
+
+        win.draw_line(Line(top_left, top_right), default if self.has_top else color)
+        win.draw_line(Line(top_right, bottom_right), default if self.has_right else color)
+        win.draw_line(Line(bottom_left, bottom_right), default if self.has_bottom else color)
+        win.draw_line(Line(top_left, bottom_left), default if self.has_left else color)
 
     def get_center(self):
         x = self.top_left.x + ((self.bottom_right.x - self.top_left.x) / 2)
