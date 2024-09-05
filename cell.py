@@ -10,6 +10,8 @@ class Cell:
         self.has_bottom = has_bottom
         self.has_left = has_left
         self.win = win
+        self.visited = False
+
 
     def draw(self):
         if not self.win:
@@ -26,6 +28,7 @@ class Cell:
         win.draw_line(Line(bottom_left, bottom_right), default if self.has_bottom else color)
         win.draw_line(Line(top_left, bottom_left), default if self.has_left else color)
 
+
     def get_center(self):
         x = self.top_left.x + ((self.bottom_right.x - self.top_left.x) / 2)
         y = self.bottom_right.y + ((self.top_left.y - self.bottom_right.y) / 2)
@@ -35,5 +38,4 @@ class Cell:
     def draw_move(self, to_cell, undo=False):
         color = "gray" if undo else "red"
         self.win.draw_line(Line(self.get_center(), to_cell.get_center()), color)
-
 

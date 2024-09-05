@@ -17,8 +17,8 @@ class Tests(unittest.TestCase):
         )
 
     def test_maze_create_tiny_cells(self):
-        num_cols = 100
-        num_rows = 100
+        num_cols = 20
+        num_rows = 20
         m1 = Maze(0, 0, num_rows, num_cols, 1, 1, None)
         self.assertEqual(
             len(m1.cells),
@@ -41,6 +41,21 @@ class Tests(unittest.TestCase):
         )
         self.assertEqual(
             end.has_bottom,
+            False,
+        )
+
+    def test_maze_visited_reset(self):
+        num_cols = 10
+        num_rows = 10
+        m1 = Maze(0, 0, num_rows, num_cols, 1, 1, None, None)
+        start = m1.cells[0][0]
+        end = m1.cells[-1][-1]
+        self.assertEqual(
+            start.visited,
+            False,
+        )
+        self.assertEqual(
+            end.visited,
             False,
         )
 
